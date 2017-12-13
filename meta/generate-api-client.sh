@@ -7,4 +7,4 @@ dir=$(dirname "$0")
 
 [ -f "$dir/$SWAGGER_CODEGEN" ] || curl -fL "$SWAGGER_CODEGEN_SNAPSHOTS/swagger-codegen-cli-$(curl "$SWAGGER_CODEGEN_SNAPSHOTS/maven-metadata.xml" | xsltproc "$dir/swagger-codegen-snapshot.xslt" -).jar" -o "$dir/$SWAGGER_CODEGEN"
 
-java -jar $SWAGGER_CODEGEN generate -i https://atiw-sportfest.github.io/backend/swagger.json -l typescript-angular -o api-client -c "$dir/swagger-codegen.config.json"
+java -jar $dir/$SWAGGER_CODEGEN generate -i https://atiw-sportfest.github.io/backend/swagger.json -l typescript-angular -o "$dir/.." -c "$dir/swagger-codegen.config.json"
