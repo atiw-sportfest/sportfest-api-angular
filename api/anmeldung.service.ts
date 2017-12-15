@@ -63,9 +63,9 @@ export class AnmeldungService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public anmeldebogenKidGet(kid: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public anmeldebogenKidGet(kid: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public anmeldebogenKidGet(kid: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public anmeldebogenKidGet(kid: number, observe?: 'body', reportProgress?: boolean): Observable<Blob>;
+    public anmeldebogenKidGet(kid: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Blob>>;
+    public anmeldebogenKidGet(kid: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Blob>>;
     public anmeldebogenKidGet(kid: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (kid === null || kid === undefined) {
             throw new Error('Required parameter kid was null or undefined when calling anmeldebogenKidGet.');
@@ -86,8 +86,9 @@ export class AnmeldungService {
         let consumes: string[] = [
         ];
 
-        return this.httpClient.get<any>(`${this.basePath}/anmeldebogen/${encodeURIComponent(String(kid))}`,
+        return this.httpClient.get(`${this.basePath}/anmeldebogen/${encodeURIComponent(String(kid))}`,
             {
+                responseType: "blob",
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
